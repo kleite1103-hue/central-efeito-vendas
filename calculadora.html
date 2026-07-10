@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora de Taxas Shopee 2026 — Efeito Vendas</title>
+<meta property="og:title" content="Calculadora de Taxas Shopee 2026 — quanto sobra pra você?">
+<meta property="og:description" content="Taxa, repasse líquido, margem e o alerta de pulo de faixa. Grátis, por @kaalineleite.">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--orange:#f04e23;--bg:#0a0a0b;--panel:#141519;--line:#26272c;--green:#2ecc71;--red:#e74c3c}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:#f4f2ec;font-family:'Inter Tight',sans-serif;line-height:1.5;
+  background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);
+  background-size:120px 120px}
+.wrap{max-width:640px;margin:0 auto;padding:28px 20px 60px}
+.top{display:flex;justify-content:space-between;align-items:center;font-family:'DM Mono';font-size:13px;letter-spacing:.08em;color:#9a978f;margin-bottom:34px}
+.top b{color:var(--orange);letter-spacing:.2em}
+.tag{display:flex;align-items:center;gap:10px;font-family:'DM Mono';font-size:13px;letter-spacing:.18em;color:var(--orange);margin-bottom:14px}
+.tag .sq{width:14px;height:14px;background:var(--orange)}
+h1{font-size:36px;line-height:1.08;font-weight:800;letter-spacing:-.02em;margin-bottom:10px}
+h1 .o{color:var(--orange)}
+.sub{color:#a9a69d;font-size:15px;margin-bottom:28px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px;margin-bottom:16px}
+label{display:block;font-family:'DM Mono';font-size:11px;letter-spacing:.1em;color:#8a877f;margin:14px 0 6px;text-transform:uppercase}
+label:first-child{margin-top:0}
+input{width:100%;background:#0e0f12;border:1px solid var(--line);border-radius:10px;color:#fff;padding:14px;font-family:'Inter Tight';font-size:18px;font-weight:700}
+input:focus{outline:none;border-color:var(--orange)}
+.chk{display:flex;gap:12px;align-items:flex-start;margin-top:14px;font-size:14px;color:#c9c6be}
+.chk input{width:20px;height:20px;margin-top:2px;accent-color:var(--orange)}
+.res{display:none}
+.linha{display:flex;justify-content:space-between;align-items:baseline;padding:12px 0;border-bottom:1px solid var(--line);font-size:15px;color:#c9c6be}
+.linha b{font-family:'DM Mono';font-size:17px;color:#fff}
+.linha.tot{border-bottom:none;padding-top:16px}
+.linha.tot span{font-size:17px;font-weight:800;color:#fff}
+.linha.tot b{font-size:30px;color:var(--orange)}
+.faixa-pill{display:inline-block;background:rgba(240,78,35,.14);color:var(--orange);font-family:'DM Mono';font-size:12px;letter-spacing:.08em;padding:5px 12px;border-radius:20px;margin-bottom:6px}
+.margem{font-size:14px;color:#9a978f;text-align:right}
+.margem b{color:var(--green)}
+.margem b.neg{color:var(--red)}
+.alerta{border-left:4px solid var(--orange);background:rgba(240,78,35,.10);padding:16px 18px;border-radius:0 12px 12px 0;font-size:15px;color:#f0ede6;margin-top:16px;display:none}
+.alerta b{color:var(--orange)}
+.btn{margin-top:18px;width:100%;background:var(--orange);color:#fff;border:none;border-radius:12px;padding:16px;font-family:'Inter Tight';font-weight:800;font-size:16px;cursor:pointer}
+.btn:active{transform:scale(.985)}
+.tab{width:100%;border-collapse:collapse;font-size:13px;margin-top:6px}
+.tab th{font-family:'DM Mono';font-size:10px;letter-spacing:.1em;color:#8a877f;text-align:left;padding:8px 6px;border-bottom:1px solid var(--line)}
+.tab td{padding:9px 6px;border-bottom:1px solid var(--line);color:#c9c6be}
+.tab td b{color:#fff;font-family:'DM Mono'}
+.note{font-size:12px;color:#6a675d;margin-top:12px;line-height:1.6}
+footer{margin-top:40px;padding-top:20px;border-top:1px solid var(--line);font-family:'DM Mono';font-size:12px;color:#6a675d;letter-spacing:.08em;line-height:1.8;text-align:center}
+footer a{color:var(--orange);text-decoration:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><span>@kaalineleite</span><b>EFEITO VENDAS</b></div>
+
+  <div class="tag"><span class="sq"></span>CALCULADORA · TAXAS SHOPEE 2026</div>
+  <h1>Quanto a Shopee fica — e quanto <span class="o">sobra pra você.</span></h1>
+  <p class="sub">Taxas vigentes desde março/2026, por faixa de preço. Digita e vê na hora: taxa total, repasse líquido, margem — e o alerta de pulo de faixa que ninguém te mostra.</p>
+
+  <div class="card">
+    <label>Preço de venda (R$)</label>
+    <input id="preco" type="number" step="0.01" inputmode="decimal" placeholder="79,99" oninput="calc()">
+    <label>Custo do produto (R$) — opcional</label>
+    <input id="custo" type="number" step="0.01" inputmode="decimal" placeholder="0" oninput="calc()">
+    <label>Outros custos por venda (embalagem, frete extra, imposto...) — opcional</label>
+    <input id="extras" type="number" step="0.01" inputmode="decimal" placeholder="0" oninput="calc()">
+    <div class="chk"><input type="checkbox" id="cpf450" onchange="calc()"><span><b>Sou CPF com 450+ pedidos/90 dias</b> (adicional de R$ 3,00 por item)</span></div>
+    <div class="chk"><input type="checkbox" id="destaque" onchange="calc()"><span><b>Participo de Campanha de Destaque</b> (+2,5% temporário)</span></div>
+  </div>
+
+  <div class="card res" id="res">
+    <span class="faixa-pill" id="pill"></span>
+    <div class="linha"><span>Comissão (<span id="pcom"></span>)</span><b id="vcom"></b></div>
+    <div class="linha"><span>Taxa fixa por item</span><b id="vfixa"></b></div>
+    <div class="linha" id="l-extra-cpf" style="display:none"><span>Adicional CPF alto volume</span><b id="vcpf"></b></div>
+    <div class="linha" id="l-extra-dest" style="display:none"><span>Campanha de Destaque (2,5%)</span><b id="vdest"></b></div>
+    <div class="linha"><span><b style="font-size:15px">Total Shopee</b> (<span id="ptot"></span> do preço)</span><b id="vtot" style="color:var(--red)"></b></div>
+    <div class="linha tot"><span>Você recebe</span><b id="vliq"></b></div>
+    <div class="margem" id="mrg"></div>
+    <div class="alerta" id="alerta"></div>
+  </div>
+
+  <div class="card">
+    <label style="margin-top:0">Tabela vigente (mar/2026 · CNPJ e CPF &lt; 450 pedidos)</label>
+    <table class="tab">
+      <tr><th>Preço do item</th><th>Comissão</th><th>Taxa fixa</th></tr>
+      <tr><td>Abaixo de R$ 8</td><td><b>20%</b></td><td><b>50% do preço</b></td></tr>
+      <tr><td>R$ 8 a R$ 79,99</td><td><b>20%</b></td><td><b>R$ 4</b></td></tr>
+      <tr><td>R$ 80 a R$ 99,99</td><td><b>14%</b></td><td><b>R$ 16</b></td></tr>
+      <tr><td>R$ 100 a R$ 199,99</td><td><b>14%</b></td><td><b>R$ 20</b></td></tr>
+      <tr><td>R$ 200 ou mais</td><td><b>14%</b></td><td><b>R$ 26</b></td></tr>
+    </table>
+    <p class="note">Comissão já inclui a taxa de transação e o Programa de Frete Grátis (obrigatório desde 03/2026). Teto de R$ 100 de comissão foi removido. Subsídio Pix (5-8%) é desconto pro comprador — seu líquido não muda. Valores conforme Central do Vendedor; confira sempre a política vigente. Cálculo simplificado — não substitui sua precificação completa com impostos e custos fixos.</p>
+  </div>
+
+  <footer>
+    CALCULADORA DE TAXAS · EFEITO VENDAS<br>
+    <a href="index.html">← MAIS MATERIAIS GRÁTIS NA CENTRAL</a><br>
+    <a href="https://instagram.com/kaalineleite" target="_blank">@KAALINELEITE</a> · SISTEMA &gt; ESFORÇO
+  </footer>
+</div>
+
+<script>
+var FAIXAS=[
+  {min:0,    max:7.999,  com:0.20, fixaPct:0.50, nome:"FAIXA 1 · ABAIXO DE R$8"},
+  {min:8,    max:79.999, com:0.20, fixa:4,  nome:"FAIXA 2 · R$8 A R$79,99"},
+  {min:80,   max:99.999, com:0.14, fixa:16, nome:"FAIXA 3 · R$80 A R$99,99"},
+  {min:100,  max:199.999,com:0.14, fixa:20, nome:"FAIXA 4 · R$100 A R$199,99"},
+  {min:200,  max:1e12,   com:0.14, fixa:26, nome:"FAIXA 5 · R$200+"}
+];
+function taxa(p, cpf450, destaque){
+  var f=FAIXAS.find(function(x){return p>=x.min && p<=x.max});
+  var fixa = f.fixaPct? p*f.fixaPct : f.fixa;
+  var com = p*f.com;
+  var extraCpf = cpf450? 3:0;
+  var extraDest = destaque? p*0.025:0;
+  return {f:f, com:com, fixa:fixa, cpf:extraCpf, dest:extraDest, total:com+fixa+extraCpf+extraDest};
+}
+var fmt=function(v){return v.toLocaleString('pt-BR',{style:'currency',currency:'BRL'})};
+function calc(){
+  var p=parseFloat(document.getElementById('preco').value);
+  if(!p||p<=0){document.getElementById('res').style.display='none';return;}
+  var custo=parseFloat(document.getElementById('custo').value)||0;
+  var extras=parseFloat(document.getElementById('extras').value)||0;
+  var cpf450=document.getElementById('cpf450').checked;
+  var dest=document.getElementById('destaque').checked;
+  var t=taxa(p,cpf450,dest);
+  var liq=p-t.total;
+  var lucro=liq-custo-extras;
+
+  document.getElementById('res').style.display='block';
+  document.getElementById('pill').textContent=t.f.nome;
+  document.getElementById('pcom').textContent=(t.f.com*100)+'%';
+  document.getElementById('vcom').textContent=fmt(t.com);
+  document.getElementById('vfixa').textContent=fmt(t.fixa);
+  document.getElementById('l-extra-cpf').style.display=cpf450?'flex':'none';
+  document.getElementById('vcpf').textContent=fmt(t.cpf);
+  document.getElementById('l-extra-dest').style.display=dest?'flex':'none';
+  document.getElementById('vdest').textContent=fmt(t.dest);
+  document.getElementById('ptot').textContent=(t.total/p*100).toFixed(1)+'%';
+  document.getElementById('vtot').textContent='− '+fmt(t.total);
+  document.getElementById('vliq').textContent=fmt(liq);
+
+  var m=document.getElementById('mrg');
+  if(custo>0||extras>0){
+    var pct=lucro/p*100;
+    m.innerHTML='Lucro por venda: <b class="'+(lucro<0?'neg':'')+'">'+fmt(lucro)+'</b> · Margem: <b class="'+(lucro<0?'neg':'')+'">'+pct.toFixed(1)+'%</b>';
+  } else m.innerHTML='';
+
+  /* ALERTA DE PULO DE FAIXA: se vender no teto da faixa anterior render mais, avisa */
+  var al=document.getElementById('alerta'); al.style.display='none';
+  var tetos=[79.99, 99.99, 199.99];
+  for(var i=0;i<tetos.length;i++){
+    var teto=tetos[i];
+    if(p>teto && p<=teto+15){
+      var tAlt=taxa(teto,cpf450,dest);
+      var liqAlt=teto-tAlt.total;
+      if(liqAlt>liq){
+        al.style.display='block';
+        al.innerHTML='⚠️ <b>Pulo de faixa detectado!</b> Vendendo a <b>'+fmt(teto)+'</b> você receberia <b>'+fmt(liqAlt)+'</b> — ou seja, <b>'+fmt(liqAlt-liq)+' A MAIS</b> do que vendendo a '+fmt(p)+'. Preço maior, dinheiro menor. Ajusta o preço ou pula a faixa com folga.';
+        break;
+      }
+    }
+  }
+}
+</script>
+</body>
+</html>
