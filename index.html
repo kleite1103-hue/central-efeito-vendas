@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Central de Materiais — Efeito Vendas | @kaalineleite</title>
+<meta property="og:title" content="Central de Materiais — Efeito Vendas">
+<meta property="og:description" content="Checklists, guias e ferramentas gratuitas pra vender mais na Shopee. Por @kaalineleite.">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--orange:#f04e23;--bg:#0a0a0b;--panel:#141519;--light:#f5f3ec;--line:#26272c}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:#f4f2ec;font-family:'Inter Tight',sans-serif;line-height:1.5;
+  background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);
+  background-size:120px 120px}
+.wrap{max-width:680px;margin:0 auto;padding:28px 20px 60px}
+.top{display:flex;justify-content:space-between;align-items:center;font-family:'DM Mono';font-size:13px;letter-spacing:.08em;color:#9a978f;margin-bottom:40px}
+.top b{color:var(--orange);letter-spacing:.2em}
+.tag{display:flex;align-items:center;gap:10px;font-family:'DM Mono';font-size:13px;letter-spacing:.18em;color:var(--orange);margin-bottom:16px}
+.tag .sq{width:14px;height:14px;background:var(--orange)}
+h1{font-size:42px;line-height:1.06;font-weight:800;letter-spacing:-.02em;margin-bottom:12px}
+h1 .o{color:var(--orange)}
+.sub{color:#a9a69d;font-size:16px;margin-bottom:34px}
+.gate{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px}
+.gate h2{font-size:20px;font-weight:800;margin-bottom:6px}
+.gate p{font-size:14px;color:#9a978f;margin-bottom:18px}
+label{display:block;font-family:'DM Mono';font-size:11px;letter-spacing:.1em;color:#8a877f;margin:14px 0 6px;text-transform:uppercase}
+input,select{width:100%;background:#0e0f12;border:1px solid var(--line);border-radius:10px;color:#fff;padding:14px;font-family:'Inter Tight';font-size:16px}
+input:focus,select:focus{outline:none;border-color:var(--orange)}
+.btn{margin-top:20px;width:100%;background:var(--orange);color:#fff;border:none;border-radius:12px;padding:16px;font-family:'Inter Tight';font-weight:800;font-size:16px;cursor:pointer;letter-spacing:.02em}
+.btn:active{transform:scale(.985)}
+.priv{font-size:12px;color:#6a675d;margin-top:12px;text-align:center}
+.grid{display:grid;gap:16px;margin-top:8px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px;display:block;text-decoration:none;color:#f4f2ec;position:relative;transition:.15s}
+.card:hover{border-color:var(--orange)}
+.card .ct{font-family:'DM Mono';font-size:11px;letter-spacing:.14em;color:var(--orange);margin-bottom:10px}
+.card h3{font-size:19px;font-weight:800;line-height:1.25;margin-bottom:8px}
+.card p{font-size:14px;color:#9a978f}
+.card .go{margin-top:14px;font-weight:800;font-size:14px;color:var(--orange)}
+.novo{position:absolute;top:16px;right:16px;background:var(--orange);color:#160b06;font-family:'DM Mono';font-size:10px;letter-spacing:.1em;padding:4px 8px;border-radius:5px;font-weight:500}
+.ola{font-size:15px;color:#a9a69d;margin-bottom:20px}
+.ola b{color:#fff}
+.hidden{display:none}
+footer{margin-top:48px;padding-top:20px;border-top:1px solid var(--line);font-family:'DM Mono';font-size:12px;color:#6a675d;letter-spacing:.08em;line-height:1.8;text-align:center}
+footer a{color:var(--orange);text-decoration:none}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#1e1f24;border:1px solid var(--orange);color:#fff;padding:12px 20px;border-radius:10px;font-size:14px;z-index:9;opacity:0;transition:.25s;pointer-events:none}
+.toast.on{opacity:1}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><span>@kaalineleite</span><b>EFEITO VENDAS</b></div>
+
+  <div class="tag"><span class="sq"></span>CENTRAL DE MATERIAIS · GRÁTIS</div>
+  <h1>Materiais que fazem sua loja <span class="o">vender mais.</span></h1>
+  <p class="sub">Checklists, guias e ferramentas que eu uso nas lojas que atendo — liberados pra você. Cadastra uma vez, acessa tudo, e recebe os novos primeiro.</p>
+
+  <!-- GATE DE CADASTRO -->
+  <div class="gate" id="gate">
+    <h2>Libera seu acesso 🔓</h2>
+    <p>Leva 20 segundos e vale pra todos os materiais — os de hoje e os próximos.</p>
+    <label>Seu nome</label>
+    <input id="f-nome" placeholder="Como você quer ser chamado(a)" autocomplete="name">
+    <label>Seu WhatsApp (com DDD)</label>
+    <input id="f-zap" placeholder="41 99999-8888" inputmode="tel" autocomplete="tel">
+    <label>Seu e-mail</label>
+    <input id="f-email" placeholder="voce@email.com" inputmode="email" autocomplete="email">
+    <label>Quanto sua loja fatura por mês?</label>
+    <select id="f-fat">
+      <option value="">Selecione...</option>
+      <option>Ainda não comecei a vender</option>
+      <option>Até R$ 5 mil</option>
+      <option>R$ 5 mil a R$ 20 mil</option>
+      <option>R$ 20 mil a R$ 100 mil</option>
+      <option>Acima de R$ 100 mil</option>
+    </select>
+    <button class="btn" onclick="liberar()">LIBERAR MATERIAIS →</button>
+    <p class="priv">Seus dados ficam com a Efeito Vendas e servem só pra te enviar materiais e novidades. Sem spam.</p>
+  </div>
+
+  <!-- BIBLIOTECA -->
+  <div id="lib" class="hidden">
+    <p class="ola">Bem-vindo(a), <b id="ola-nome"></b>! Seus materiais estão liberados: 👇</p>
+    <div class="grid" id="grid"></div>
+  </div>
+
+  <footer>
+    CENTRAL DE MATERIAIS · EFEITO VENDAS<br>
+    <a href="https://instagram.com/kaalineleite" target="_blank">@KAALINELEITE</a> · SISTEMA &gt; ESFORÇO
+  </footer>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ===== CONFIG =====
+   Para plugar o cadastro no Supabase (SDR Hub), preencha as duas linhas abaixo
+   e crie a tabela 'central_leads' (nome, whatsapp, email, faturamento, created_at). */
+var SUPABASE_URL = "";   // ex: https://gtlqjeuuwhxoxsffvepg.supabase.co
+var SUPABASE_KEY = "";   // anon key
+
+function toast(m){var t=document.getElementById('toast');t.textContent=m;t.classList.add('on');setTimeout(function(){t.classList.remove('on')},2200);}
+
+function renderLib(){
+  fetch('materiais.json?v='+Date.now()).then(function(r){return r.json()}).then(function(d){
+    var g=document.getElementById('grid'); g.innerHTML='';
+    (d.materiais||[]).forEach(function(m){
+      var a=document.createElement('a'); a.className='card'; a.href=m.link;
+      a.innerHTML=(m.novo?'<span class="novo">NOVO</span>':'')+
+        '<div class="ct">'+m.tag+'</div><h3>'+m.titulo+'</h3><p>'+m.desc+'</p><div class="go">Acessar →</div>';
+      g.appendChild(a);
+    });
+  }).catch(function(){ document.getElementById('grid').innerHTML='<p style="color:#9a978f">Não consegui carregar a lista agora — atualiza a página.</p>'; });
+}
+
+function show(cad){
+  document.getElementById('gate').classList.add('hidden');
+  document.getElementById('lib').classList.remove('hidden');
+  document.getElementById('ola-nome').textContent=(cad.nome||'').split(' ')[0];
+  renderLib();
+}
+
+function liberar(){
+  var nome=document.getElementById('f-nome').value.trim();
+  var zap=document.getElementById('f-zap').value.trim();
+  var email=document.getElementById('f-email').value.trim();
+  var fat=document.getElementById('f-fat').value;
+  if(!nome||!zap){toast('Preenche nome e WhatsApp 🙂');return;}
+  var cad={nome:nome,whatsapp:zap,email:email,faturamento:fat,source:'central_materiais',created_at:new Date().toISOString()};
+  try{localStorage.setItem('ev_cadastro',JSON.stringify(cad));}catch(e){}
+  if(SUPABASE_URL && SUPABASE_KEY){
+    fetch(SUPABASE_URL+'/rest/v1/central_leads',{method:'POST',
+      headers:{'apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY,'Content-Type':'application/json','Prefer':'return=minimal'},
+      body:JSON.stringify(cad)}).catch(function(){});
+  }
+  show(cad);
+}
+
+/* já cadastrado? entra direto */
+try{
+  var prev=localStorage.getItem('ev_cadastro');
+  if(prev) show(JSON.parse(prev));
+}catch(e){}
+</script>
+</body>
+</html>
