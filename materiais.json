@@ -1,12 +1,20 @@
 {
   "materiais": [
     {
+      "id": "calculadora-taxas",
+      "titulo": "Calculadora de Taxas Shopee 2026",
+      "desc": "Digita o preço e vê na hora: taxa total, repasse líquido, margem — e o alerta de PULO DE FAIXA (R$0,01 que custa R$7,20).",
+      "tag": "PRECIFICAÇÃO · FERRAMENTA",
+      "link": "calculadora.html",
+      "novo": true
+    },
+    {
       "id": "pacote-clareza",
       "titulo": "Pacote CLAREZA — Regra nova dos afiliados",
       "desc": "Checklist do mês, dia a dia, + as 3 mensagens prontas pra copiar: afiliado PJ, afiliado PF e contador.",
       "tag": "AFILIADOS · FISCAL",
       "link": "clareza.html",
-      "novo": true
+      "novo": false
     }
   ]
 }
