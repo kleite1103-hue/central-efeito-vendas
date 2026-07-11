@@ -81,6 +81,11 @@ footer a{color:var(--orange);text-decoration:none}
   <!-- BIBLIOTECA -->
   <div id="lib" class="hidden">
     <p class="ola">Bem-vindo(a), <b id="ola-nome"></b>! Seus materiais estão liberados: 👇</p>
+    <a href="https://quiz.consultoriaefeitovendas.com.br/" target="_blank" style="display:block;background:rgba(240,78,35,.10);border:2px solid rgba(240,78,35,.5);border-radius:14px;padding:18px 20px;margin-bottom:20px;text-decoration:none;color:#f4f2ec">
+      <div style="font-family:'DM Mono';font-size:11px;letter-spacing:.14em;color:#f04e23;margin-bottom:6px">🎯 PRÓXIMO PASSO RECOMENDADO</div>
+      <div style="font-size:16px;font-weight:800">Faz o diagnóstico gratuito da sua loja</div>
+      <div style="font-size:13px;color:#a9a69d;margin-top:4px">3 minutos, e você descobre exatamente onde sua operação tá travando → </div>
+    </a>
     <div class="grid" id="grid"></div>
   </div>
 
@@ -95,8 +100,8 @@ footer a{color:var(--orange);text-decoration:none}
 /* ===== CONFIG =====
    Para plugar o cadastro no Supabase (SDR Hub), preencha as duas linhas abaixo
    e crie a tabela 'central_leads' (nome, whatsapp, email, faturamento, created_at). */
-var SUPABASE_URL = "";   // ex: https://gtlqjeuuwhxoxsffvepg.supabase.co
-var SUPABASE_KEY = "";   // anon key
+var SUPABASE_URL = "https://gtlqjeuuwhxoxsffvepg.supabase.co";
+var SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd0bHFqZXV1d2h4b3hzZmZ2ZXBnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc0NzkwNDEsImV4cCI6MjA5MzA1NTA0MX0.fyrcioMRHyFEnKBC-KQeXH3jcCbb19C9rD43h5DRsWY";
 
 function toast(m){var t=document.getElementById('toast');t.textContent=m;t.classList.add('on');setTimeout(function(){t.classList.remove('on')},2200);}
 
