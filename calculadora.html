@@ -347,20 +347,42 @@ function anAnalisar(){
   else                  st = {t:'Saudável', c:'var(--green)'};
 
 
-  // ── ALERTA DE PULO DE FAIXA (zona vermelha) ──
-  let pulo = '';
-  const tetos = [79.99, 99.99, 199.99];
-  for (const teto of tetos){
-    if (preco > teto && preco <= teto + 15){
-      const txT = anGetTaxas(teto);
-      const liqAtual = preco - tx.fixa - preco*(tx.comissao/100);
-      const liqTeto  = teto  - txT.fixa - teto*(txT.comissao/100);
-      if (liqTeto > liqAtual){
-        pulo = `<div style="margin:14px 0 0;border-left:3px solid var(--red);background:rgba(255,75,75,.08);border-radius:0 10px 10px 0;padding:12px 14px;font-size:.78rem;line-height:1.55;color:var(--text)">⚠️ <b style="color:var(--red)">Zona vermelha de faixa:</b> só em taxas Shopee, vendendo a <b>${_f(teto)}</b> você receberia <b style="color:var(--green)">${_f(liqTeto-liqAtual)} a mais por venda</b> do que a ${_f(preco)}. Ajuste o preço pro teto da faixa, ou pule a faixa com folga.</div>`;
-      }
-      break;
-    }
+  // ── ESTRATÉGIA DE FAIXA (sempre visível) ──
+  const liqShopee = (p)=>{ const t=anGetTaxas(p); return p - t.fixa - p*(t.comissao/100); };
+  const liqAtual  = liqShopee(preco);
+  // pontos estratégicos: teto anterior, preço atual, teto da faixa, entrada lucrativa da próxima
+  const pontos = [];
+  const teto = preco<80?79.99 : preco<100?99.99 : preco<200?199.99 : null;
+  const tetoAnt = preco>=200?199.99 : preco>=100?99.99 : preco>=80?79.99 : null;
+  const entradaProx = preco<80?88.37 : preco<100?104.65 : preco<200?206.97 : null;
+  if(tetoAnt) pontos.push({lbl:'Teto da faixa de baixo', p:tetoAnt});
+  pontos.push({lbl:'Seu preço atual', p:preco, atual:true});
+  if(teto && Math.abs(teto-preco)>0.005) pontos.push({lbl:'Teto da sua faixa', p:teto});
+  if(entradaProx && entradaProx>preco) pontos.push({lbl:'Entrada lucrativa da faixa de cima', p:entradaProx});
+  pontos.forEach(x=>x.liq=liqShopee(x.p));
+  const melhor = Math.max(...pontos.map(x=>x.liq));
+  const linhas = pontos.map(x=>{
+    const d = x.liq - liqAtual;
+    const dTxt = x.atual ? '' : `<span style="color:${d>=0?'var(--green)':'var(--red)'};font-size:.68rem;margin-left:8px">${d>=0?'+':''}${_f(d)}</span>`;
+    const coroa = Math.abs(x.liq-melhor)<0.005 ? ' 🏆' : '';
+    return `<div class="cost-line"><span class="cost-lbl">${x.lbl}${x.atual?' <b style="color:var(--sp)">(você)</b>':''} · ${_f(x.p)}</span><span style="color:${x.atual?'var(--text)':'var(--muted)'};font-weight:${x.atual?'700':'500'}">${_f(x.liq)}${coroa}${dTxt}</span></div>`;
+  }).join('');
+  let dica;
+  if (tetoAnt && liqShopee(tetoAnt) > liqAtual){
+    dica = `⚠️ <b style="color:var(--red)">Zona vermelha:</b> vendendo a <b>${_f(tetoAnt)}</b> você recebe <b style="color:var(--green)">${_f(liqShopee(tetoAnt)-liqAtual)} a mais</b> por venda. Ou desce pro teto de baixo, ou sobe acima de <b>${_f(entradaProx)}</b> — nunca fica no meio.`;
+  } else if (teto && teto-preco>0.005){
+    dica = `💡 Você pode subir até <b>${_f(teto)}</b> sem mudar de faixa: mesmas taxas, <b style="color:var(--green)">${_f(liqShopee(teto)-liqAtual)} a mais</b> de líquido por venda — se o produto sustentar o preço.`;
+  } else if (!teto){
+    dica = `✅ Faixa final (R$200+): sem pulo acima de você. Referência abaixo: a ${_f(199.99)} o líquido seria ${_f(liqShopee(199.99))}.`;
+  } else {
+    dica = `✅ Você está no teto da faixa — posição perfeita. Só suba de preço passando de <b>${_f(entradaProx)}</b>, senão o aumento vira taxa.`;
   }
+  const estrategia = `<div style="padding:16px 20px 4px">
+    <div class="sec" style="margin-bottom:12px">Estratégia de Faixa <span class="hint">líquido só de taxas Shopee, por cenário de preço</span></div>
+    ${linhas}
+    <div style="margin:12px 0 14px;border-left:3px solid var(--sp);background:rgba(255,77,28,.07);border-radius:0 10px 10px 0;padding:11px 14px;font-size:.76rem;line-height:1.6;color:var(--text)">${dica}</div>
+  </div>`;
+  const pulo='';
 
   const html = `<div class="rc" style="border-top:3px solid ${lCor}">
     <div class="rc-top">
@@ -382,6 +404,7 @@ function anAnalisar(){
       ${adsPct>0?`<div class="cost-line"><span class="cost-lbl">Ads (ROAS ${roas}x → ${adsPct.toFixed(1)}%)</span><span style="color:var(--muted)">- ${_f(vAds)}</span></div>`:''}
       ${afilPct>0?`<div class="cost-line"><span class="cost-lbl">Afiliado (ROI ${roi}x → ${afilPct.toFixed(1)}%)</span><span style="color:var(--muted)">- ${_f(vAfil)}</span></div>`:''}
     </div>
+    ${estrategia}
     <div class="diag">
       <div class="diag-row"><span class="diag-lbl">Margem Líquida</span><span class="diag-val" style="color:${st.c}">${margem.toFixed(1)}%</span></div>
       <div class="diag-row"><span class="diag-lbl">Markup (preço ÷ custo)</span><span class="diag-val" style="color:var(--text)">${markup>0?markup.toFixed(2)+'x':'—'}</span></div>
