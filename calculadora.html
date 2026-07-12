@@ -360,11 +360,13 @@ function anAnalisar(){
   const zonaVermelha = tetoAnt && liqShopee(tetoAnt) > liqAtual;
 
   if (zonaVermelha){
+    const limiar = preco<100?88.37 : preco<200?104.65 : 206.97; // dentro da SUA faixa, a partir daqui você volta a ganhar
     veredito = '⚠️ SEU PREÇO ESTÁ NA ZONA VERMELHA'; corV='var(--red)';
     corpo = `<div style="font-size:.78rem;color:var(--muted);margin-bottom:10px">Nessa altura da faixa, você recebe <b style="color:var(--red)">menos</b> do que receberia vendendo mais barato. Dois caminhos pra corrigir:</div>`
-      + linha(`Baixar pra ${_f(tetoAnt)} (teto da faixa de baixo) → você recebe`, liqShopee(tetoAnt), liqShopee(tetoAnt)-liqAtual)
-      + linha(`Ou subir pra ${_f(pulaCom)} ou mais → você recebe`, liqShopee(pulaCom), liqShopee(pulaCom)-liqAtual);
-    dica = `Nunca fique entre ${_f(tetoAnt+0.01)} e ${_f(pulaCom-0.01)}: nesse trecho, o aumento de preço vira taxa, não lucro.`;
+      + linha(`1. Baixar pra ${_f(tetoAnt)} → você recebe`, liqShopee(tetoAnt), liqShopee(tetoAnt)-liqAtual)
+      + (teto? linha(`2. Subir (a partir de ${_f(limiar)} já compensa; no teto ${_f(teto)}) → você recebe`, liqShopee(teto), liqShopee(teto)-liqAtual)
+             : linha(`2. Subir pra ${_f(limiar)} ou mais → você recebe`, liqShopee(limiar), liqShopee(limiar)-liqAtual));
+    dica = `O trecho ruim é de ${_f(tetoAnt+0.01)} até ${_f(limiar-0.01)}: ali, aumentar o preço só aumenta a taxa. Saia dele pra cima ou pra baixo.`;
   } else if (teto && teto-preco>0.005){
     veredito = '✅ SEU PREÇO ESTÁ NUMA BOA POSIÇÃO DE FAIXA'; corV='var(--green)';
     corpo = linha(`Se subir pro teto da faixa, ${_f(teto)} (taxa igual) → você recebe`, liqShopee(teto), liqShopee(teto)-liqAtual);
@@ -374,8 +376,7 @@ function anAnalisar(){
     dica = `Acima de R$ 200 não existe mais pulo de faixa — cada real a mais no preço é ~86% líquido pra você.`;
   } else {
     veredito = '🏆 POSIÇÃO PERFEITA: VOCÊ ESTÁ NO TETO DA FAIXA'; corV='var(--green)';
-    corpo = linha(`Se um dia subir, pule direto pra ${_f(pulaCom)} ou mais → você recebe`, liqShopee(pulaCom), liqShopee(pulaCom)-liqAtual);
-    dica = `Evite o trecho entre ${_f(teto+0.01)} e ${_f(pulaCom-0.01)}: ali você receberia MENOS do que recebe hoje.`;
+    dica = `Se um dia for subir o preço, pule direto pra ${_f(pulaCom)} ou mais — entre ${_f(teto+0.01)} e ${_f(pulaCom-0.01)} você receberia MENOS do que recebe hoje.`;
   }
 
   const estrategia = `<div style="padding:16px 20px 4px">
