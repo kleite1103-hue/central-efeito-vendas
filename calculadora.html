@@ -2,169 +2,504 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Calculadora de Taxas Shopee 2026 — Efeito Vendas</title>
-<meta property="og:title" content="Calculadora de Taxas Shopee 2026 — quanto sobra pra você?">
-<meta property="og:description" content="Taxa, repasse líquido, margem e o alerta de pulo de faixa. Grátis, por @kaalineleite.">
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Análise de Preço Shopee · Seller.IA Club</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--orange:#f04e23;--bg:#0a0a0b;--panel:#141519;--line:#26272c;--green:#2ecc71;--red:#e74c3c}
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:#f4f2ec;font-family:'Inter Tight',sans-serif;line-height:1.5;
-  background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);
-  background-size:120px 120px}
-.wrap{max-width:640px;margin:0 auto;padding:28px 20px 60px}
-.top{display:flex;justify-content:space-between;align-items:center;font-family:'DM Mono';font-size:13px;letter-spacing:.08em;color:#9a978f;margin-bottom:34px}
-.top b{color:var(--orange);letter-spacing:.2em}
-.tag{display:flex;align-items:center;gap:10px;font-family:'DM Mono';font-size:13px;letter-spacing:.18em;color:var(--orange);margin-bottom:14px}
-.tag .sq{width:14px;height:14px;background:var(--orange)}
-h1{font-size:36px;line-height:1.08;font-weight:800;letter-spacing:-.02em;margin-bottom:10px}
-h1 .o{color:var(--orange)}
-.sub{color:#a9a69d;font-size:15px;margin-bottom:28px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px;margin-bottom:16px}
-label{display:block;font-family:'DM Mono';font-size:11px;letter-spacing:.1em;color:#8a877f;margin:14px 0 6px;text-transform:uppercase}
-label:first-child{margin-top:0}
-input{width:100%;background:#0e0f12;border:1px solid var(--line);border-radius:10px;color:#fff;padding:14px;font-family:'Inter Tight';font-size:18px;font-weight:700}
-input:focus{outline:none;border-color:var(--orange)}
-.chk{display:flex;gap:12px;align-items:flex-start;margin-top:14px;font-size:14px;color:#c9c6be}
-.chk input{width:20px;height:20px;margin-top:2px;accent-color:var(--orange)}
-.res{display:none}
-.linha{display:flex;justify-content:space-between;align-items:baseline;padding:12px 0;border-bottom:1px solid var(--line);font-size:15px;color:#c9c6be}
-.linha b{font-family:'DM Mono';font-size:17px;color:#fff}
-.linha.tot{border-bottom:none;padding-top:16px}
-.linha.tot span{font-size:17px;font-weight:800;color:#fff}
-.linha.tot b{font-size:30px;color:var(--orange)}
-.faixa-pill{display:inline-block;background:rgba(240,78,35,.14);color:var(--orange);font-family:'DM Mono';font-size:12px;letter-spacing:.08em;padding:5px 12px;border-radius:20px;margin-bottom:6px}
-.margem{font-size:14px;color:#9a978f;text-align:right}
-.margem b{color:var(--green)}
-.margem b.neg{color:var(--red)}
-.alerta{border-left:4px solid var(--orange);background:rgba(240,78,35,.10);padding:16px 18px;border-radius:0 12px 12px 0;font-size:15px;color:#f0ede6;margin-top:16px;display:none}
-.alerta b{color:var(--orange)}
-.btn{margin-top:18px;width:100%;background:var(--orange);color:#fff;border:none;border-radius:12px;padding:16px;font-family:'Inter Tight';font-weight:800;font-size:16px;cursor:pointer}
-.btn:active{transform:scale(.985)}
-.tab{width:100%;border-collapse:collapse;font-size:13px;margin-top:6px}
-.tab th{font-family:'DM Mono';font-size:10px;letter-spacing:.1em;color:#8a877f;text-align:left;padding:8px 6px;border-bottom:1px solid var(--line)}
-.tab td{padding:9px 6px;border-bottom:1px solid var(--line);color:#c9c6be}
-.tab td b{color:#fff;font-family:'DM Mono'}
-.note{font-size:12px;color:#6a675d;margin-top:12px;line-height:1.6}
-footer{margin-top:40px;padding-top:20px;border-top:1px solid var(--line);font-family:'DM Mono';font-size:12px;color:#6a675d;letter-spacing:.08em;line-height:1.8;text-align:center}
-footer a{color:var(--orange);text-decoration:none}
+:root{
+  --bg:#07080a;--card:#0d0e12;--card2:#0a0b0e;--bdr:#1c1d22;--bdr2:#15161a;
+  --text:#ECECEE;--muted:#6a6d78;--dim:#34363d;
+  --green:#1ee06a;--red:#ff4b4b;--yel:#ffb020;--ora:#ff8a4c;
+  --sp:#ff4d1c;--sp2:#ff8a4c;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{-webkit-text-size-adjust:100%;}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(circle at 12% -5%,rgba(255,77,28,.13),transparent 42%),radial-gradient(circle at 92% 105%,rgba(123,47,255,.07),transparent 45%);}
+body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.04;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+.wrap{position:relative;z-index:1;max-width:680px;margin:0 auto;padding:34px 18px 90px;}
+
+.eyebrow{display:flex;align-items:center;gap:12px;font-size:.66rem;font-weight:600;letter-spacing:3.5px;text-transform:uppercase;color:var(--muted);margin-bottom:18px;}
+.eyebrow-line{width:24px;height:2px;background:var(--sp);border-radius:2px;}
+.title{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,12vw,4.6rem);line-height:.9;letter-spacing:1px;}
+.title .accent{color:var(--sp);}
+.subtitle{font-size:.84rem;color:var(--muted);margin-top:14px;letter-spacing:.3px;}
+.subtitle b{color:var(--text);font-weight:600;}
+
+.info-row{display:flex;gap:12px;margin:28px 0;flex-wrap:wrap;}
+.info-box{flex:1;min-width:215px;background:var(--card);border:1px solid var(--bdr);border-radius:14px;overflow:hidden;}
+.info-box-title{display:flex;align-items:center;gap:9px;padding:12px 15px;font-size:.62rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--sp);border-bottom:1px solid var(--bdr2);}
+.info-box-title::before{content:'';width:18px;height:2px;background:currentColor;border-radius:2px;flex-shrink:0;}
+.info-box table{width:100%;border-collapse:collapse;font-size:.78rem;}
+.info-box th,.info-box td{padding:9px 14px;text-align:left;border-bottom:1px solid var(--bdr2);}
+.info-box th{color:var(--muted);font-weight:500;font-size:.62rem;letter-spacing:1px;text-transform:uppercase;}
+.info-box td:last-child{text-align:right;}
+.info-box tr:last-child td{border-bottom:none;}
+
+.card{position:relative;background:var(--card);border:1px solid var(--bdr);border-radius:18px;padding:24px;margin-bottom:16px;overflow:hidden;}
+.card-num{position:absolute;top:8px;right:20px;font-family:'Bebas Neue',sans-serif;font-size:7.5rem;line-height:.8;color:var(--sp);opacity:.08;letter-spacing:-3px;pointer-events:none;}
+.sec{display:flex;align-items:center;gap:11px;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:2.5px;color:var(--sp);margin-bottom:20px;}
+.sec::before{content:'';width:22px;height:2px;background:currentColor;border-radius:2px;flex-shrink:0;}
+.sec .hint{font-weight:400;letter-spacing:.5px;text-transform:none;color:var(--dim);font-size:.66rem;margin-left:2px;}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;}
+.fg{display:flex;flex-direction:column;gap:7px;}
+.fg label{font-size:.7rem;color:var(--muted);font-weight:500;letter-spacing:.3px;}
+.fg input,.fg select{background:var(--bg);border:1px solid #242630;border-radius:10px;color:var(--text);padding:13px 14px;font-size:1.05rem;font-family:'Outfit',sans-serif;font-weight:500;width:100%;transition:border-color .2s,box-shadow .2s;}
+.fg input:focus,.fg select:focus{outline:none;border-color:var(--sp);box-shadow:0 0 0 3px rgba(255,77,28,.12);}
+.fg input::placeholder{color:#2c2e36;}
+.note{background:var(--card2);border:1px dashed #242630;border-radius:10px;padding:11px 14px;font-size:.72rem;color:var(--muted);line-height:1.65;margin-top:4px;}
+.note b{color:var(--text);font-weight:600;}
+.afil-readout{background:rgba(255,77,28,.07);border:1px solid rgba(255,77,28,.28);border-radius:10px;padding:12px 15px;margin-top:12px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
+.afil-readout .ar-lbl{font-size:.74rem;color:var(--muted);line-height:1.45;}
+.afil-readout .ar-lbl span{color:var(--dim);font-size:.66rem;}
+.afil-readout .ar-val{font-family:'Bebas Neue',sans-serif;font-size:1.9rem;color:var(--sp);letter-spacing:-.5px;white-space:nowrap;}
+
+/* TOGGLE */
+.toggle-pill{position:relative;display:inline-block;width:46px;height:26px;flex-shrink:0;}
+.toggle-pill input{opacity:0;width:0;height:0;}
+.toggle-slider{position:absolute;inset:0;background:#22242c;border:1px solid #2c2e36;border-radius:100px;cursor:pointer;transition:.2s;}
+.toggle-slider:before{content:'';position:absolute;height:18px;width:18px;left:3px;top:3px;background:var(--muted);border-radius:50%;transition:.2s;}
+#an-antecipa:checked + .toggle-slider{background:rgba(255,77,28,.2);border-color:var(--sp);}
+#an-antecipa:checked + .toggle-slider:before{transform:translateX(20px);background:var(--sp);}
+.an-ant-selected{border-color:var(--sp)!important;background:rgba(255,77,28,.06)!important;}
+.sp-faixa{display:inline-block;font-size:.6rem;padding:4px 9px;border-radius:5px;margin-bottom:7px;background:var(--bdr);color:var(--muted);font-weight:600;letter-spacing:.5px;}
+
+.btn{width:100%;padding:17px;margin-top:20px;border:none;border-radius:13px;cursor:pointer;font-family:'Outfit',sans-serif;font-size:.92rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;display:flex;align-items:center;justify-content:center;gap:9px;transition:transform .15s,box-shadow .2s,filter .2s;}
+.btn svg{width:17px;height:17px;}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.06);}
+.btn:active{transform:translateY(0);}
+.btn-sp{background:linear-gradient(135deg,var(--sp),var(--sp2));color:#fff;box-shadow:0 8px 30px rgba(255,77,28,.28);}
+.btn-ghost{background:transparent;border:1px solid var(--sp);color:var(--sp);box-shadow:none;}
+.btn-ghost:hover{background:rgba(255,77,28,.08);filter:none;}
+
+.results{display:none;}
+.results.show{display:block;animation:fadein .35s ease;}
+@keyframes fadein{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.res-title{display:flex;align-items:center;gap:12px;justify-content:center;font-size:.62rem;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin:30px 0 16px;}
+.res-title::before,.res-title::after{content:'';height:1px;width:36px;background:linear-gradient(90deg,transparent,var(--bdr),transparent);}
+
+.rc{background:var(--card);border:1px solid var(--bdr);border-radius:16px;overflow:hidden;}
+.rc-top{padding:18px 20px 15px;border-bottom:1px solid var(--bdr2);position:relative;}
+.rc-tag{font-size:.6rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px;color:var(--sp);}
+.rc-nome{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:.3px;line-height:1.05;color:var(--text);margin-bottom:10px;padding-right:90px;}
+.rc-price{font-family:'Bebas Neue',sans-serif;font-size:3.4rem;letter-spacing:-1px;line-height:1;}
+.rc-ref{font-size:.74rem;color:var(--muted);margin-top:6px;}
+.status-badge{position:absolute;top:18px;right:20px;font-size:.6rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:5px 11px;border-radius:100px;border:1px solid;}
+.costs{padding:16px 20px;}
+.cost-line{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--bdr2);font-size:.82rem;}
+.cost-line:last-child{border-bottom:none;}
+.cost-lbl{color:var(--muted);font-size:.78rem;}
+.diag{margin:0 20px 18px;border:1px solid var(--bdr2);border-radius:12px;overflow:hidden;}
+.diag-row{display:flex;justify-content:space-between;align-items:center;padding:13px 16px;border-bottom:1px solid var(--bdr2);}
+.diag-row:last-child{border-bottom:none;}
+.diag-lbl{font-size:.66rem;color:var(--muted);text-transform:uppercase;letter-spacing:1.2px;font-weight:600;}
+.diag-val{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;letter-spacing:-.5px;}
+
+@media(max-width:600px){.info-row{flex-direction:column;}}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <div class="top"><span>@kaalineleite</span><b>EFEITO VENDAS</b></div>
 
-  <div class="tag"><span class="sq"></span>CALCULADORA · TAXAS SHOPEE 2026</div>
-  <h1>Quanto a Shopee fica — e quanto <span class="o">sobra pra você.</span></h1>
-  <p class="sub">Taxas vigentes desde março/2026, por faixa de preço. Digita e vê na hora: taxa total, repasse líquido, margem — e o alerta de pulo de faixa que ninguém te mostra.</p>
+  <div class="eyebrow"><span class="eyebrow-line"></span>Análise · Preço Praticado · Shopee</div>
+  <h1 class="title">Análise de<br><span class="accent">Preço Shopee</span></h1>
+  <p class="subtitle">Você informa o preço que pratica, os custos e o marketing — e a calculadora mostra <b>o que realmente sobra</b>.</p>
 
-  <div class="card">
-    <label>Preço de venda (R$)</label>
-    <input id="preco" type="number" step="0.01" inputmode="decimal" placeholder="79,99" oninput="calc()">
-    <label>Custo do produto (R$) — opcional</label>
-    <input id="custo" type="number" step="0.01" inputmode="decimal" placeholder="0" oninput="calc()">
-    <label>Outros custos por venda (embalagem, frete extra, imposto...) — opcional</label>
-    <input id="extras" type="number" step="0.01" inputmode="decimal" placeholder="0" oninput="calc()">
-    <div class="chk"><input type="checkbox" id="cpf450" onchange="calc()"><span><b>Sou CPF com 450+ pedidos/90 dias</b> (adicional de R$ 3,00 por item)</span></div>
-    <div class="chk"><input type="checkbox" id="destaque" onchange="calc()"><span><b>Participo de Campanha de Destaque</b> (+2,5% temporário)</span></div>
-  </div>
-
-  <div class="card res" id="res">
-    <span class="faixa-pill" id="pill"></span>
-    <div class="linha"><span>Comissão (<span id="pcom"></span>)</span><b id="vcom"></b></div>
-    <div class="linha"><span>Taxa fixa por item</span><b id="vfixa"></b></div>
-    <div class="linha" id="l-extra-cpf" style="display:none"><span>Adicional CPF alto volume</span><b id="vcpf"></b></div>
-    <div class="linha" id="l-extra-dest" style="display:none"><span>Campanha de Destaque (2,5%)</span><b id="vdest"></b></div>
-    <div class="linha"><span><b style="font-size:15px">Total Shopee</b> (<span id="ptot"></span> do preço)</span><b id="vtot" style="color:var(--red)"></b></div>
-    <div class="linha tot"><span>Você recebe</span><b id="vliq"></b></div>
-    <div class="margem" id="mrg"></div>
-    <div class="alerta" id="alerta"></div>
+  <div class="info-row">
+    <div class="info-box">
+      <div class="info-box-title">Comissões por Faixa</div>
+      <table>
+        <thead><tr><th>Faixa</th><th>Comissão</th><th>Fixa</th></tr></thead>
+        <tbody>
+          <tr><td>Até R$ 79,99</td><td style="color:var(--red);font-weight:700">20%</td><td style="color:var(--muted)">R$ 4</td></tr>
+          <tr><td>R$ 80 – 99,99</td><td style="color:var(--sp);font-weight:700">14%</td><td style="color:var(--muted)">R$ 16</td></tr>
+          <tr><td>R$ 100 – 199,99</td><td style="color:var(--sp);font-weight:700">14%</td><td style="color:var(--muted)">R$ 20</td></tr>
+          <tr><td>R$ 200+</td><td style="color:var(--green);font-weight:700">14%</td><td style="color:var(--muted)">R$ 26</td></tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 
   <div class="card">
-    <label style="margin-top:0">Tabela vigente (mar/2026 · CNPJ e CPF &lt; 450 pedidos)</label>
-    <table class="tab">
-      <tr><th>Preço do item</th><th>Comissão</th><th>Taxa fixa</th></tr>
-      <tr><td>Abaixo de R$ 8</td><td><b>20%</b></td><td><b>50% do preço</b></td></tr>
-      <tr><td>R$ 8 a R$ 79,99</td><td><b>20%</b></td><td><b>R$ 4</b></td></tr>
-      <tr><td>R$ 80 a R$ 99,99</td><td><b>14%</b></td><td><b>R$ 16</b></td></tr>
-      <tr><td>R$ 100 a R$ 199,99</td><td><b>14%</b></td><td><b>R$ 20</b></td></tr>
-      <tr><td>R$ 200 ou mais</td><td><b>14%</b></td><td><b>R$ 26</b></td></tr>
-    </table>
-    <p class="note">Comissão já inclui a taxa de transação e o Programa de Frete Grátis (obrigatório desde 03/2026). Teto de R$ 100 de comissão foi removido. Subsídio Pix (5-8%) é desconto pro comprador — seu líquido não muda. Valores conforme Central do Vendedor; confira sempre a política vigente. Cálculo simplificado — não substitui sua precificação completa com impostos e custos fixos.</p>
+    <div class="card-num">01</div>
+    <div class="sec">Preço &amp; Custos</div>
+    <div class="fg" style="margin-bottom:14px;"><label>Nome do Produto</label><input id="an-nome" type="text" placeholder="Ex: Kit 3 Camisetas Dry Fit"></div>
+    <div class="grid">
+      <div class="fg"><label>Valor de Venda (R$) *</label><input id="an-preco" type="tel" inputmode="decimal" placeholder="89,90" oninput="anUpdateHints()"></div>
+      <div class="fg"><label>Custo Fornecedor (R$) *</label><input id="an-custo" type="tel" inputmode="decimal" placeholder="25,00"></div>
+      <div class="fg"><label>Embalagem / Outros (R$)</label><input id="an-outros" type="tel" inputmode="decimal" placeholder="2,00"></div>
+      <div class="fg"><label>Imposto NF (%)</label><input id="an-imposto" type="tel" inputmode="decimal" placeholder="6"></div>
+    </div>
   </div>
 
-  <footer>
-    CALCULADORA DE TAXAS · EFEITO VENDAS<br>
-    <a href="index.html">← MAIS MATERIAIS GRÁTIS NA CENTRAL</a><br>
-    <a href="https://instagram.com/kaalineleite" target="_blank">@KAALINELEITE</a> · SISTEMA &gt; ESFORÇO
-  </footer>
-</div>
+  <div class="card">
+    <div class="card-num">02</div>
+    <div class="sec">Marketing</div>
+    <div class="grid">
+      <div class="fg">
+        <label>Anuncia com Shopee Ads?</label>
+        <select id="an-temAds" onchange="anToggleAds()">
+          <option value="nao">Não</option>
+          <option value="sim">Sim</option>
+        </select>
+      </div>
+      <div class="fg">
+        <label>Produto na Ferramenta de Afiliados?</label>
+        <select id="an-temAfil" onchange="anToggleAfil()">
+          <option value="nao">Não</option>
+          <option value="sim">Sim</option>
+        </select>
+      </div>
+    </div>
 
+    <div id="an-adsBox" style="display:none;margin-top:14px;">
+      <div class="fg">
+        <label>ROAS médio dos Ads · últimos 30 dias (deste produto)</label>
+        <input id="an-roas" type="tel" inputmode="decimal" placeholder="Ex: 10" oninput="anUpdateAdsHint()">
+      </div>
+      <div id="an-adsHint" class="afil-readout" style="display:none;"></div>
+    </div>
+
+    <div id="an-afilBox" style="display:none;margin-top:14px;">
+      <div class="fg">
+        <label>ROI médio de afiliados · últimos 30 dias (deste produto)</label>
+        <input id="an-roi" type="tel" inputmode="decimal" placeholder="Ex: 8" oninput="anUpdateAfilHint()">
+      </div>
+      <div id="an-afilHint" class="afil-readout" style="display:none;"></div>
+    </div>
+
+    <div class="note" style="margin-top:14px;">
+      <b>Ads:</b> pegue o <b>ROAS médio dos últimos 30 dias</b> no Gerenciador de Anúncios. <b>Afiliados:</b> pegue o <b>ROI médio dos últimos 30 dias</b> na Ferramenta de Afiliados. A calculadora converte sozinha e mostra quanto você gasta, em média, por venda em cada canal.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-num">03</div>
+    <div class="sec">Shopee Antecipa</div>
+
+    <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px;">
+      <label class="toggle-pill">
+        <input type="checkbox" id="an-antecipa" onchange="anToggleAntecipa()">
+        <span class="toggle-slider"></span>
+      </label>
+      <div>
+        <div style="font-size:.9rem;color:var(--text);font-weight:500;">Participo do Shopee Antecipa</div>
+        <div style="font-size:.7rem;color:var(--muted);margin-top:2px;">Taxa descontada sobre o valor recebido</div>
+      </div>
+    </div>
+
+    <div id="an-antecipaTipo" style="display:none;">
+      <div style="font-size:.64rem;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;font-weight:600;margin-bottom:11px;">Tipo de Vendedor</div>
+      <div style="display:flex;flex-direction:column;gap:9px;">
+        <label style="display:flex;align-items:center;gap:11px;padding:12px 15px;background:var(--bg);border:1px solid #242630;border-radius:10px;cursor:pointer;transition:.2s;" id="an-ant-lbl-1">
+          <input type="radio" name="an-antTipo" value="1" onchange="anSelectAntecipa(this)" style="accent-color:var(--sp);width:16px;height:16px;">
+          <div style="flex:1;"><div style="font-size:.88rem;font-weight:600;">Loja Oficial</div><div style="font-size:.68rem;color:var(--muted);">Taxa de 1% sobre o valor recebido</div></div>
+          <span style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--sp);">1%</span>
+        </label>
+        <label style="display:flex;align-items:center;gap:11px;padding:12px 15px;background:var(--bg);border:1px solid #242630;border-radius:10px;cursor:pointer;transition:.2s;" id="an-ant-lbl-2">
+          <input type="radio" name="an-antTipo" value="2.5" onchange="anSelectAntecipa(this)" style="accent-color:var(--sp);width:16px;height:16px;">
+          <div style="flex:1;"><div style="font-size:.88rem;font-weight:600;">Vendedor Indicado</div><div style="font-size:.68rem;color:var(--muted);">Taxa de 2,5% sobre o valor recebido</div></div>
+          <span style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--sp);">2,5%</span>
+        </label>
+        <label style="display:flex;align-items:center;gap:11px;padding:12px 15px;background:var(--bg);border:1px solid #242630;border-radius:10px;cursor:pointer;transition:.2s;" id="an-ant-lbl-3">
+          <input type="radio" name="an-antTipo" value="3.5" onchange="anSelectAntecipa(this)" style="accent-color:var(--sp);width:16px;height:16px;">
+          <div style="flex:1;"><div style="font-size:.88rem;font-weight:600;">Demais Vendedores</div><div style="font-size:.68rem;color:var(--muted);">Taxa de 3,5% sobre o valor recebido</div></div>
+          <span style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--sp);">3,5%</span>
+        </label>
+      </div>
+    </div>
+
+    <button class="btn btn-sp" onclick="anAnalisar()">Analisar Preço
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </button>
+  </div>
+
+  <div class="results" id="an-results">
+    <div class="res-title">Resultado</div>
+    <div id="an-cardsArea"></div>
+    <button class="btn btn-ghost" id="an-pdfBtn" onclick="anBaixarPDF()" style="display:none;margin-top:14px;">Baixar PDF da análise
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+    </button>
+  </div>
+
+</div><!-- /wrap -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
-var FAIXAS=[
-  {min:0,    max:7.999,  com:0.20, fixaPct:0.50, nome:"FAIXA 1 · ABAIXO DE R$8"},
-  {min:8,    max:79.999, com:0.20, fixa:4,  nome:"FAIXA 2 · R$8 A R$79,99"},
-  {min:80,   max:99.999, com:0.14, fixa:16, nome:"FAIXA 3 · R$80 A R$99,99"},
-  {min:100,  max:199.999,com:0.14, fixa:20, nome:"FAIXA 4 · R$100 A R$199,99"},
-  {min:200,  max:1e12,   com:0.14, fixa:26, nome:"FAIXA 5 · R$200+"}
-];
-function taxa(p, cpf450, destaque){
-  var f=FAIXAS.find(function(x){return p>=x.min && p<=x.max});
-  var fixa = f.fixaPct? p*f.fixaPct : f.fixa;
-  var com = p*f.com;
-  var extraCpf = cpf450? 3:0;
-  var extraDest = destaque? p*0.025:0;
-  return {f:f, com:com, fixa:fixa, cpf:extraCpf, dest:extraDest, total:com+fixa+extraCpf+extraDest};
+// ── HELPERS ───────────────────────────────────────────
+function _p(id){const v=document.getElementById(id)?.value||'';return parseFloat(v.replace('R$','').replace(/\s/g,'').replace(',','.').trim())||0;}
+function _f(v){return isNaN(v)?'R$ 0,00':v.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});}
+function _esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+
+// ── TABELA DE TAXAS SHOPEE (mesma das outras calculadoras) ──
+function anGetTaxas(p){
+  if (p<80)  return {comissao:20,fixa:4, faixa:'ATÉ R$ 79,99'};
+  if (p<100) return {comissao:14,fixa:16,faixa:'R$ 80 – R$ 99,99'};
+  if (p<200) return {comissao:14,fixa:20,faixa:'R$ 100 – R$ 199,99'};
+  return             {comissao:14,fixa:26,faixa:'ACIMA DE R$ 200'};
 }
-var fmt=function(v){return v.toLocaleString('pt-BR',{style:'currency',currency:'BRL'})};
-function calc(){
-  var p=parseFloat(document.getElementById('preco').value);
-  if(!p||p<=0){document.getElementById('res').style.display='none';return;}
-  var custo=parseFloat(document.getElementById('custo').value)||0;
-  var extras=parseFloat(document.getElementById('extras').value)||0;
-  var cpf450=document.getElementById('cpf450').checked;
-  var dest=document.getElementById('destaque').checked;
-  var t=taxa(p,cpf450,dest);
-  var liq=p-t.total;
-  var lucro=liq-custo-extras;
 
-  document.getElementById('res').style.display='block';
-  document.getElementById('pill').textContent=t.f.nome;
-  document.getElementById('pcom').textContent=(t.f.com*100)+'%';
-  document.getElementById('vcom').textContent=fmt(t.com);
-  document.getElementById('vfixa').textContent=fmt(t.fixa);
-  document.getElementById('l-extra-cpf').style.display=cpf450?'flex':'none';
-  document.getElementById('vcpf').textContent=fmt(t.cpf);
-  document.getElementById('l-extra-dest').style.display=dest?'flex':'none';
-  document.getElementById('vdest').textContent=fmt(t.dest);
-  document.getElementById('ptot').textContent=(t.total/p*100).toFixed(1)+'%';
-  document.getElementById('vtot').textContent='− '+fmt(t.total);
-  document.getElementById('vliq').textContent=fmt(liq);
-
-  var m=document.getElementById('mrg');
-  if(custo>0||extras>0){
-    var pct=lucro/p*100;
-    m.innerHTML='Lucro por venda: <b class="'+(lucro<0?'neg':'')+'">'+fmt(lucro)+'</b> · Margem: <b class="'+(lucro<0?'neg':'')+'">'+pct.toFixed(1)+'%</b>';
-  } else m.innerHTML='';
-
-  /* ALERTA DE PULO DE FAIXA: se vender no teto da faixa anterior render mais, avisa */
-  var al=document.getElementById('alerta'); al.style.display='none';
-  var tetos=[79.99, 99.99, 199.99];
-  for(var i=0;i<tetos.length;i++){
-    var teto=tetos[i];
-    if(p>teto && p<=teto+15){
-      var tAlt=taxa(teto,cpf450,dest);
-      var liqAlt=teto-tAlt.total;
-      if(liqAlt>liq){
-        al.style.display='block';
-        al.innerHTML='⚠️ <b>Pulo de faixa detectado!</b> Vendendo a <b>'+fmt(teto)+'</b> você receberia <b>'+fmt(liqAlt)+'</b> — ou seja, <b>'+fmt(liqAlt-liq)+' A MAIS</b> do que vendendo a '+fmt(p)+'. Preço maior, dinheiro menor. Ajusta o preço ou pula a faixa com folga.';
-        break;
-      }
-    }
+// ── SHOPEE ANTECIPA ──
+function anToggleAntecipa(){
+  const on = document.getElementById('an-antecipa').checked;
+  document.getElementById('an-antecipaTipo').style.display = on ? 'block' : 'none';
+  if (!on){
+    document.querySelectorAll('input[name="an-antTipo"]').forEach(r=>r.checked=false);
+    ['an-ant-lbl-1','an-ant-lbl-2','an-ant-lbl-3'].forEach(id=>document.getElementById(id).classList.remove('an-ant-selected'));
   }
 }
+function anSelectAntecipa(radio){
+  ['an-ant-lbl-1','an-ant-lbl-2','an-ant-lbl-3'].forEach(id=>document.getElementById(id).classList.remove('an-ant-selected'));
+  radio.closest('label').classList.add('an-ant-selected');
+}
+function anGetAntecipaTaxa(){
+  if (!document.getElementById('an-antecipa').checked) return 0;
+  const sel = document.querySelector('input[name="an-antTipo"]:checked');
+  return sel ? parseFloat(sel.value) : 0;
+}
+
+// ── ADS ──
+function anToggleAds(){
+  const sim = document.getElementById('an-temAds').value==='sim';
+  document.getElementById('an-adsBox').style.display = sim ? 'block' : 'none';
+  if (!sim){
+    document.getElementById('an-roas').value = '';
+    document.getElementById('an-adsHint').style.display = 'none';
+  }
+}
+function anUpdateAdsHint(){
+  const hint = document.getElementById('an-adsHint');
+  const sim  = document.getElementById('an-temAds').value==='sim';
+  const preco= _p('an-preco');
+  const roas = _p('an-roas');
+  if (!sim || preco<=0 || roas<=0){ hint.style.display='none'; return; }
+  const pct = 100/roas, gasto = preco/roas;
+  hint.style.display = 'flex';
+  hint.innerHTML = `<div class="ar-lbl">Custo médio de Ads por venda<br><span>ROAS ${roas}x · ${pct.toFixed(1)}% do preço</span></div><div class="ar-val">${_f(gasto)}</div>`;
+}
+
+// ── AFILIADOS ──
+function anToggleAfil(){
+  const sim = document.getElementById('an-temAfil').value==='sim';
+  document.getElementById('an-afilBox').style.display = sim ? 'block' : 'none';
+  if (!sim){
+    document.getElementById('an-roi').value = '';
+    document.getElementById('an-afilHint').style.display = 'none';
+  }
+}
+function anUpdateAfilHint(){
+  const hint = document.getElementById('an-afilHint');
+  const sim  = document.getElementById('an-temAfil').value==='sim';
+  const preco= _p('an-preco');
+  const roi  = _p('an-roi');
+  if (!sim || preco<=0 || roi<=0){ hint.style.display='none'; return; }
+  const pct  = 100/roi;
+  const pago = preco/roi;
+  hint.style.display = 'flex';
+  hint.innerHTML = `<div class="ar-lbl">Comissão média paga ao afiliado<br><span>ROI ${roi}x · ${pct.toFixed(1)}% do preço</span></div><div class="ar-val">${_f(pago)}</div>`;
+}
+function anUpdateHints(){ anUpdateAdsHint(); anUpdateAfilHint(); }
+
+// ── ANÁLISE ──
+function anAnalisar(){
+  const preco   = _p('an-preco');
+  const nome    = (document.getElementById('an-nome').value||'').trim();
+  const custo   = _p('an-custo');
+  const outros  = _p('an-outros');
+  const imposto = _p('an-imposto');
+  const temAds  = document.getElementById('an-temAds').value==='sim';
+  const roas    = temAds ? _p('an-roas') : 0;   // ROAS médio 30d do item (Shopee Ads)
+  const temAfil = document.getElementById('an-temAfil').value==='sim';
+  const roi     = temAfil ? _p('an-roi') : 0;   // ROI médio 30d do item (Ferramenta de Afiliados)
+  const antPct  = anGetAntecipaTaxa();
+
+  if (preco<=0){ alert('Preencha o Valor de Venda.'); return; }
+  if (custo<=0){ alert('Preencha o Custo do Fornecedor.'); return; }
+  if (temAds && roas<=0){ alert('Informe o ROAS médio dos Ads (últimos 30 dias) ou marque "Não".'); return; }
+  if (temAfil && roi<=0){ alert('Informe o ROI médio de afiliados (últimos 30 dias) ou marque "Não".'); return; }
+  if (document.getElementById('an-antecipa').checked && antPct===0){ alert('Selecione o tipo de vendedor no Shopee Antecipa.'); return; }
+
+  const tx      = anGetTaxas(preco);
+  const adsPct  = roas>0 ? 100/roas : 0;
+  const afilPct = roi>0 ? 100/roi : 0;
+
+  const vCom = preco*(tx.comissao/100);
+  const vImp = preco*(imposto/100);
+  const vAnt = preco*(antPct/100);
+  const vAds = preco*(adsPct/100);
+  const vAfil= preco*(afilPct/100);
+
+  const lucro  = preco - custo - outros - tx.fixa - vCom - vImp - vAnt - vAds - vAfil;
+  const margem = preco>0 ? (lucro/preco*100) : 0;
+  const markup = custo>0 ? (preco/custo) : 0;
+  const mktTotal = vAds + vAfil;
+  const lCor = lucro<0 ? 'var(--red)' : 'var(--green)';
+
+  // Diagnóstico de margem (referência: margem líquida saudável > 25%)
+  let st;
+  if (lucro<0)          st = {t:'Prejuízo', c:'var(--red)'};
+  else if (margem<10)   st = {t:'Crítico',  c:'var(--red)'};
+  else if (margem<25)   st = {t:'Atenção',  c:'var(--yel)'};
+  else                  st = {t:'Saudável', c:'var(--green)'};
+
+
+  // ── ALERTA DE PULO DE FAIXA (zona vermelha) ──
+  let pulo = '';
+  const tetos = [79.99, 99.99, 199.99];
+  for (const teto of tetos){
+    if (preco > teto && preco <= teto + 15){
+      const txT = anGetTaxas(teto);
+      const liqAtual = preco - tx.fixa - preco*(tx.comissao/100);
+      const liqTeto  = teto  - txT.fixa - teto*(txT.comissao/100);
+      if (liqTeto > liqAtual){
+        pulo = `<div style="margin:14px 0 0;border-left:3px solid var(--red);background:rgba(255,75,75,.08);border-radius:0 10px 10px 0;padding:12px 14px;font-size:.78rem;line-height:1.55;color:var(--text)">⚠️ <b style="color:var(--red)">Zona vermelha de faixa:</b> só em taxas Shopee, vendendo a <b>${_f(teto)}</b> você receberia <b style="color:var(--green)">${_f(liqTeto-liqAtual)} a mais por venda</b> do que a ${_f(preco)}. Ajuste o preço pro teto da faixa, ou pule a faixa com folga.</div>`;
+      }
+      break;
+    }
+  }
+
+  const html = `<div class="rc" style="border-top:3px solid ${lCor}">
+    <div class="rc-top">
+      <span class="status-badge" style="color:${st.c};border-color:${st.c}55;background:${st.c}11">${st.t}</span>
+      ${nome?`<div class="rc-nome">${_esc(nome)}</div>`:''}
+      <div class="rc-tag">O que sobra · Lucro líquido / unid.</div>
+      <span class="sp-faixa">${tx.faixa}</span>
+      <div class="rc-price" style="color:${lCor}">${_f(lucro)}</div>
+      <div class="rc-ref">Sobre venda de <strong style="color:var(--text)">${_f(preco)}</strong> · margem ${margem.toFixed(1)}%</div>
+      ${pulo}
+    </div>
+    <div class="costs">
+      <div class="cost-line"><span class="cost-lbl">Custo Produto</span><span style="color:var(--muted)">- ${_f(custo)}</span></div>
+      <div class="cost-line"><span class="cost-lbl">Embalagem / Outros</span><span style="color:var(--muted)">- ${_f(outros)}</span></div>
+      <div class="cost-line"><span class="cost-lbl">Taxa Fixa Shopee</span><span style="color:var(--red)">- ${_f(tx.fixa)}</span></div>
+      <div class="cost-line"><span class="cost-lbl">Comissão Shopee (${tx.comissao}%)</span><span style="color:var(--red)">- ${_f(vCom)}</span></div>
+      ${imposto>0?`<div class="cost-line"><span class="cost-lbl">Imposto NF (${imposto}%)</span><span style="color:var(--ora)">- ${_f(vImp)}</span></div>`:''}
+      ${antPct>0?`<div class="cost-line"><span class="cost-lbl">Shopee Antecipa (${antPct}%)</span><span style="color:var(--sp)">- ${_f(vAnt)}</span></div>`:''}
+      ${adsPct>0?`<div class="cost-line"><span class="cost-lbl">Ads (ROAS ${roas}x → ${adsPct.toFixed(1)}%)</span><span style="color:var(--muted)">- ${_f(vAds)}</span></div>`:''}
+      ${afilPct>0?`<div class="cost-line"><span class="cost-lbl">Afiliado (ROI ${roi}x → ${afilPct.toFixed(1)}%)</span><span style="color:var(--muted)">- ${_f(vAfil)}</span></div>`:''}
+    </div>
+    <div class="diag">
+      <div class="diag-row"><span class="diag-lbl">Margem Líquida</span><span class="diag-val" style="color:${st.c}">${margem.toFixed(1)}%</span></div>
+      <div class="diag-row"><span class="diag-lbl">Markup (preço ÷ custo)</span><span class="diag-val" style="color:var(--text)">${markup>0?markup.toFixed(2)+'x':'—'}</span></div>
+      ${afilPct>0?`<div class="diag-row"><span class="diag-lbl">Afiliado pago / venda</span><span class="diag-val" style="color:var(--sp)">${_f(vAfil)}</span></div>`:''}
+      ${adsPct>0?`<div class="diag-row"><span class="diag-lbl">Ads gasto / venda</span><span class="diag-val" style="color:var(--sp)">${_f(vAds)}</span></div>`:''}
+      ${mktTotal>0?`<div class="diag-row"><span class="diag-lbl">Total em Marketing</span><span class="diag-val" style="color:var(--sp)">${_f(mktTotal)}</span></div>`:''}
+    </div>
+  </div>`;
+
+  document.getElementById('an-cardsArea').innerHTML = html;
+  anDados = { nome, preco, custo, outros, imposto, tx, antPct, roas, roi, adsPct, afilPct, vCom, vImp, vAnt, vAds, vAfil, lucro, margem, markup, mktTotal, status: st.t };
+  document.getElementById('an-pdfBtn').style.display = 'flex';
+  const r=document.getElementById('an-results'); r.classList.add('show'); r.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+// ── PDF ──
+let anDados = null;
+function anBaixarPDF(){
+  if (!anDados){ alert('Faça uma análise primeiro.'); return; }
+  if (!(window.jspdf && window.jspdf.jsPDF)){ window.print(); return; }
+  const { jsPDF } = window.jspdf;
+  const d = anDados;
+  const doc = new jsPDF({unit:'mm',format:'a4'});
+  const W = 210;
+  const ORA=[255,77,28], DARK=[24,24,28], GRAY=[120,120,130], GREEN=[20,165,88], RED=[210,55,55];
+  const money = v => 'R$ ' + (v||0).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+  const lucroCor = d.lucro<0?RED:GREEN;
+  let y;
+
+  // Cabeçalho
+  doc.setFillColor(...ORA); doc.rect(0,0,W,26,'F');
+  doc.setTextColor(255,255,255); doc.setFont('helvetica','bold'); doc.setFontSize(18);
+  doc.text('Análise de Preço · Shopee', 14, 13);
+  doc.setFont('helvetica','normal'); doc.setFontSize(9);
+  doc.text('Seller.IA Club', 14, 20);
+  doc.text(new Date().toLocaleDateString('pt-BR'), W-14, 20, {align:'right'});
+
+  // Destaque do lucro
+  y = 40;
+  if (d.nome){
+    doc.setTextColor(...DARK); doc.setFont('helvetica','bold'); doc.setFontSize(13);
+    const nl = doc.splitTextToSize(d.nome, W-28);
+    doc.text(nl, 14, y); y += nl.length*6 + 4;
+  }
+  doc.setTextColor(...GRAY); doc.setFont('helvetica','normal'); doc.setFontSize(9);
+  doc.text('O QUE SOBRA · LUCRO LÍQUIDO / UNID.', 14, y);
+  y += 11;
+  doc.setTextColor(...lucroCor); doc.setFont('helvetica','bold'); doc.setFontSize(30);
+  doc.text(money(d.lucro), 14, y);
+  y += 8;
+  doc.setTextColor(...GRAY); doc.setFont('helvetica','normal'); doc.setFontSize(10);
+  doc.text(`Sobre venda de ${money(d.preco)}  ·  margem ${d.margem.toFixed(1)}%  ·  ${d.status}  ·  ${d.tx.faixa}`, 14, y);
+
+  y += 11;
+  doc.setDrawColor(225,225,228); doc.line(14, y, W-14, y); y += 9;
+
+  // Composição
+  doc.setTextColor(...DARK); doc.setFont('helvetica','bold'); doc.setFontSize(11);
+  doc.text('Composição', 14, y); y += 7;
+  doc.setFont('helvetica','normal'); doc.setFontSize(10);
+  const rows = [
+    ['Custo Produto', '- '+money(d.custo)],
+    ['Embalagem / Outros', '- '+money(d.outros)],
+    ['Taxa Fixa Shopee', '- '+money(d.tx.fixa)],
+    [`Comissão Shopee (${d.tx.comissao}%)`, '- '+money(d.vCom)],
+  ];
+  if (d.imposto>0) rows.push([`Imposto NF (${d.imposto}%)`, '- '+money(d.vImp)]);
+  if (d.antPct>0)  rows.push([`Shopee Antecipa (${d.antPct}%)`, '- '+money(d.vAnt)]);
+  if (d.adsPct>0)  rows.push([`Ads (ROAS ${d.roas}x = ${d.adsPct.toFixed(1)}%)`, '- '+money(d.vAds)]);
+  if (d.afilPct>0) rows.push([`Afiliado (ROI ${d.roi}x = ${d.afilPct.toFixed(1)}%)`, '- '+money(d.vAfil)]);
+  rows.forEach(r=>{
+    doc.setTextColor(...GRAY); doc.text(r[0], 14, y);
+    doc.setTextColor(...DARK); doc.text(r[1], W-14, y, {align:'right'});
+    y += 5.4; doc.setDrawColor(238,238,240); doc.line(14, y-2, W-14, y-2);
+  });
+  y += 3;
+  doc.setFont('helvetica','bold'); doc.setFontSize(11);
+  doc.setTextColor(...DARK); doc.text('Lucro Líquido', 14, y);
+  doc.setTextColor(...lucroCor); doc.text(money(d.lucro), W-14, y, {align:'right'});
+
+  // Diagnóstico
+  y += 13; doc.setDrawColor(225,225,228); doc.line(14, y-7, W-14, y-7);
+  doc.setFont('helvetica','bold'); doc.setFontSize(11); doc.setTextColor(...DARK);
+  doc.text('Diagnóstico', 14, y); y += 7;
+  doc.setFont('helvetica','normal'); doc.setFontSize(10);
+  const diag = [
+    ['Margem Líquida', d.margem.toFixed(1)+'%'],
+    ['Markup (preço / custo)', d.markup>0?d.markup.toFixed(2)+'x':'—'],
+  ];
+  if (d.afilPct>0) diag.push(['Afiliado pago / venda', money(d.vAfil)]);
+  if (d.adsPct>0)  diag.push(['Ads gasto / venda', money(d.vAds)]);
+  if (d.mktTotal>0) diag.push(['Total em Marketing', money(d.mktTotal)]);
+  diag.forEach(r=>{
+    doc.setTextColor(...GRAY); doc.text(r[0],14,y);
+    doc.setTextColor(...DARK); doc.text(r[1],W-14,y,{align:'right'});
+    y += 6.2;
+  });
+
+  // Explicação
+  y += 5; doc.setDrawColor(225,225,228); doc.line(14, y-4, W-14, y-4);
+  doc.setFont('helvetica','bold'); doc.setFontSize(10); doc.setTextColor(...DARK);
+  doc.text('Como lemos os números', 14, y); y += 6;
+  doc.setFont('helvetica','normal'); doc.setFontSize(9); doc.setTextColor(...GRAY);
+  [
+    'Ads: custo por venda = Preço / ROAS. Ex.: ROAS 10 significa 10% do preço gasto em anúncios.',
+    'Afiliado: comissão por venda = Preço / ROI (ROI médio dos últimos 30 dias do produto).',
+    'Taxas Shopee variam por faixa de preço; o Shopee Antecipa incide sobre o valor recebido.',
+    'Referência de margem líquida saudável: acima de 25%.'
+  ].forEach(t=>{ const ls=doc.splitTextToSize('•  '+t, W-28); doc.text(ls,14,y); y += ls.length*4.7; });
+
+  doc.setFontSize(8); doc.setTextColor(...GRAY);
+  doc.text('Seller.IA Club  ·  Análise de Preço Shopee  ·  gerado automaticamente', W/2, 288, {align:'center'});
+
+  doc.save('analise-preco-shopee.pdf');
+}
 </script>
+<div style="position:relative;z-index:1;max-width:680px;margin:0 auto;padding:0 18px 40px;text-align:center;font-size:.68rem;letter-spacing:2px;text-transform:uppercase;color:#6a6d78">
+<a href="index.html" style="color:#ff4d1c;text-decoration:none">← Central de Materiais</a> · Efeito Vendas · @kaalineleite
+</div>
 </body>
 </html>
