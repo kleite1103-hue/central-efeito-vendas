@@ -347,40 +347,42 @@ function anAnalisar(){
   else                  st = {t:'Saudável', c:'var(--green)'};
 
 
-  // ── ESTRATÉGIA DE FAIXA (sempre visível) ──
+  // ── ESTRATÉGIA DE FAIXA (veredito claro pro vendedor) ──
   const liqShopee = (p)=>{ const t=anGetTaxas(p); return p - t.fixa - p*(t.comissao/100); };
   const liqAtual  = liqShopee(preco);
-  // pontos estratégicos: teto anterior, preço atual, teto da faixa, entrada lucrativa da próxima
-  const pontos = [];
   const teto = preco<80?79.99 : preco<100?99.99 : preco<200?199.99 : null;
   const tetoAnt = preco>=200?199.99 : preco>=100?99.99 : preco>=80?79.99 : null;
-  const entradaProx = preco<80?88.37 : preco<100?104.65 : preco<200?206.97 : null;
-  if(tetoAnt) pontos.push({lbl:'Teto da faixa de baixo', p:tetoAnt});
-  pontos.push({lbl:'Seu preço atual', p:preco, atual:true});
-  if(teto && Math.abs(teto-preco)>0.005) pontos.push({lbl:'Teto da sua faixa', p:teto});
-  if(entradaProx && entradaProx>preco) pontos.push({lbl:'Entrada lucrativa da faixa de cima', p:entradaProx});
-  pontos.forEach(x=>x.liq=liqShopee(x.p));
-  const melhor = Math.max(...pontos.map(x=>x.liq));
-  const linhas = pontos.map(x=>{
-    const d = x.liq - liqAtual;
-    const dTxt = x.atual ? '' : `<span style="color:${d>=0?'var(--green)':'var(--red)'};font-size:.68rem;margin-left:8px">${d>=0?'+':''}${_f(d)}</span>`;
-    const coroa = Math.abs(x.liq-melhor)<0.005 ? ' 🏆' : '';
-    return `<div class="cost-line"><span class="cost-lbl">${x.lbl}${x.atual?' <b style="color:var(--sp)">(você)</b>':''} · ${_f(x.p)}</span><span style="color:${x.atual?'var(--text)':'var(--muted)'};font-weight:${x.atual?'700':'500'}">${_f(x.liq)}${coroa}${dTxt}</span></div>`;
-  }).join('');
-  let dica;
-  if (tetoAnt && liqShopee(tetoAnt) > liqAtual){
-    dica = `⚠️ <b style="color:var(--red)">Zona vermelha:</b> vendendo a <b>${_f(tetoAnt)}</b> você recebe <b style="color:var(--green)">${_f(liqShopee(tetoAnt)-liqAtual)} a mais</b> por venda. Ou desce pro teto de baixo, ou sobe acima de <b>${_f(entradaProx)}</b> — nunca fica no meio.`;
+  const pulaCom = preco<80?88.37 : preco<100?104.65 : preco<200?206.97 : null; // a partir daqui, a faixa de cima paga mais que o teto atual
+
+  const linha = (frase, valor, delta)=>`<div class="cost-line"><span class="cost-lbl">${frase}</span><span style="color:var(--text);font-weight:600">${_f(valor)} <span style="color:${delta>=0?'var(--green)':'var(--red)'};font-size:.7rem">(${delta>=0?'+':''}${_f(delta)})</span></span></div>`;
+
+  let veredito, corV, corpo='', dica='';
+  const zonaVermelha = tetoAnt && liqShopee(tetoAnt) > liqAtual;
+
+  if (zonaVermelha){
+    veredito = '⚠️ SEU PREÇO ESTÁ NA ZONA VERMELHA'; corV='var(--red)';
+    corpo = `<div style="font-size:.78rem;color:var(--muted);margin-bottom:10px">Nessa altura da faixa, você recebe <b style="color:var(--red)">menos</b> do que receberia vendendo mais barato. Dois caminhos pra corrigir:</div>`
+      + linha(`Baixar pra ${_f(tetoAnt)} (teto da faixa de baixo) → você recebe`, liqShopee(tetoAnt), liqShopee(tetoAnt)-liqAtual)
+      + linha(`Ou subir pra ${_f(pulaCom)} ou mais → você recebe`, liqShopee(pulaCom), liqShopee(pulaCom)-liqAtual);
+    dica = `Nunca fique entre ${_f(tetoAnt+0.01)} e ${_f(pulaCom-0.01)}: nesse trecho, o aumento de preço vira taxa, não lucro.`;
   } else if (teto && teto-preco>0.005){
-    dica = `💡 Você pode subir até <b>${_f(teto)}</b> sem mudar de faixa: mesmas taxas, <b style="color:var(--green)">${_f(liqShopee(teto)-liqAtual)} a mais</b> de líquido por venda — se o produto sustentar o preço.`;
+    veredito = '✅ SEU PREÇO ESTÁ NUMA BOA POSIÇÃO DE FAIXA'; corV='var(--green)';
+    corpo = linha(`Se subir pro teto da faixa, ${_f(teto)} (taxa igual) → você recebe`, liqShopee(teto), liqShopee(teto)-liqAtual);
+    dica = `Existe ${_f(liqShopee(teto)-liqAtual)} de margem escondida entre seu preço e o teto da faixa — a taxa não muda nada até ${_f(teto)}. Teste se o produto sustenta o aumento.`;
   } else if (!teto){
-    dica = `✅ Faixa final (R$200+): sem pulo acima de você. Referência abaixo: a ${_f(199.99)} o líquido seria ${_f(liqShopee(199.99))}.`;
+    veredito = '✅ FAIXA FINAL (R$ 200+)'; corV='var(--green)';
+    dica = `Acima de R$ 200 não existe mais pulo de faixa — cada real a mais no preço é ~86% líquido pra você.`;
   } else {
-    dica = `✅ Você está no teto da faixa — posição perfeita. Só suba de preço passando de <b>${_f(entradaProx)}</b>, senão o aumento vira taxa.`;
+    veredito = '🏆 POSIÇÃO PERFEITA: VOCÊ ESTÁ NO TETO DA FAIXA'; corV='var(--green)';
+    corpo = linha(`Se um dia subir, pule direto pra ${_f(pulaCom)} ou mais → você recebe`, liqShopee(pulaCom), liqShopee(pulaCom)-liqAtual);
+    dica = `Evite o trecho entre ${_f(teto+0.01)} e ${_f(pulaCom-0.01)}: ali você receberia MENOS do que recebe hoje.`;
   }
+
   const estrategia = `<div style="padding:16px 20px 4px">
-    <div class="sec" style="margin-bottom:12px">Estratégia de Faixa <span class="hint">líquido só de taxas Shopee, por cenário de preço</span></div>
-    ${linhas}
-    <div style="margin:12px 0 14px;border-left:3px solid var(--sp);background:rgba(255,77,28,.07);border-radius:0 10px 10px 0;padding:11px 14px;font-size:.76rem;line-height:1.6;color:var(--text)">${dica}</div>
+    <div class="sec" style="margin-bottom:12px">Estratégia de Faixa <span class="hint">só taxas Shopee · sem contar seus custos</span></div>
+    <div style="font-size:.82rem;font-weight:800;letter-spacing:.5px;color:${corV};margin-bottom:10px">${veredito}</div>
+    ${corpo}
+    <div style="margin:12px 0 14px;border-left:3px solid var(--sp);background:rgba(255,77,28,.07);border-radius:0 10px 10px 0;padding:11px 14px;font-size:.76rem;line-height:1.6;color:var(--text)">💡 ${dica}</div>
   </div>`;
   const pulo='';
 
